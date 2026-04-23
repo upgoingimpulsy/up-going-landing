@@ -124,15 +124,59 @@
                     Acompañamiento integral legal, bancario y migratorio para empresarios que facturan +$15k USD/mes. Sin errores costosos.
                 </p>
 <!-- Video Player -->
-<div class="relative pt-4">
-<div class="aspect-video bg-black/40 border border-white/10 overflow-hidden rounded-lg shadow-2xl relative">
-<iframe src="https://www.youtube.com/embed/MLNPIyH51PI?rel=0&autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&fs=0" class="w-full h-full absolute inset-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
-<div class="mt-4 flex items-center gap-3">
-<div class="h-px w-12 bg-secondary/50"></div>
-<p class="text-xs font-label uppercase tracking-widest text-on-primary-container">Ver Video: El Método B2S para Expansión</p>
-</div>
-</div>
+                        <!-- Video Player Preview -->
+                        <div class="relative pt-4">
+                            <div class="group relative aspect-video bg-black/40 border border-white/10 overflow-hidden rounded-lg shadow-2xl cursor-pointer" onclick="openVideoModal()">
+                                <!-- Preview Iframe (muted/no controls) -->
+                                <iframe src="https://www.youtube.com/embed/MLNPIyH51PI?rel=0&autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" 
+                                    class="w-full h-full absolute inset-0 pointer-events-none" 
+                                    title="Preview" frameborder="0"></iframe>
+                                
+                                <!-- Play Overlay -->
+                                <div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center gap-3">
+                                <div class="h-px w-12 bg-secondary/50"></div>
+                                <p class="text-xs font-label uppercase tracking-widest text-on-primary-container">Toca para expandir video completo</p>
+                            </div>
+                        </div>
+
+                        <!-- Video Modal -->
+                        <div id="videoModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 p-4 backdrop-blur-sm">
+                            <button onclick="closeVideoModal()" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors">
+                                <span class="material-symbols-outlined text-4xl">close</span>
+                            </button>
+                            <div class="w-full max-w-5xl aspect-video bg-black shadow-2xl">
+                                <iframe id="modalIframe" src="" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        <script>
+                            function openVideoModal() {
+                                const modal = document.getElementById('videoModal');
+                                const iframe = document.getElementById('modalIframe');
+                                iframe.src = "https://www.youtube.com/embed/MLNPIyH51PI?autoplay=1&rel=0";
+                                modal.classList.remove('hidden');
+                                modal.classList.add('flex');
+                                document.body.style.overflow = 'hidden';
+                            }
+                            function closeVideoModal() {
+                                const modal = document.getElementById('videoModal');
+                                const iframe = document.getElementById('modalIframe');
+                                iframe.src = "";
+                                modal.classList.add('hidden');
+                                modal.classList.remove('flex');
+                                document.body.style.overflow = '';
+                            }
+                            // Close on escape key
+                            document.addEventListener('keydown', (e) => {
+                                if (e.key === 'Escape') closeVideoModal();
+                            });
+                        </script>
 
 </div>
 <!-- Right: Lead Form -->
